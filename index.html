@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real English Camp · Day 9 · Island Adventure English</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1f2a8c;
+    --gold:#fabc1d;
+    --teal:#1ba4b0;
+    --pink:#e8195b;
+    --lav:#b79fe6;
+    --ink:#1a1b2e;
+    --muted:#5a5d78;
+    --bg:#f5f6fc;
+    --card:#ffffff;
+    --line:#e6e7f2;
+    --ok:#16a34a;
+    --no:#dc2626;
+    --shadow:0 10px 30px rgba(31,42,140,.10);
+    --radius:22px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Nunito',system-ui,Arial,sans-serif;
+    background:
+      radial-gradient(1100px 500px at 90% -10%, rgba(27,164,176,.18), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(183,159,230,.18), transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    min-height:100vh;
+    line-height:1.5;
+  }
+  h1,h2,h3,.fred{font-family:'Fredoka',system-ui,sans-serif}
+  .wrap{max-width:1080px;margin:0 auto;padding:18px}
+
+  .tape{
+    font-family:'Fredoka';font-weight:600;letter-spacing:.04em;
+    color:#fff;background:var(--pink);
+    padding:7px 0;font-size:13px;white-space:nowrap;overflow:hidden;
+  }
+  .tape span{opacity:.92;margin:0 6px}
+
+  header.top{
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
+    flex-wrap:wrap;padding:18px;background:var(--card);border-radius:var(--radius);
+    box-shadow:var(--shadow);border:1px solid var(--line);margin-bottom:16px;
+  }
+  .logo{font-family:'Fredoka';font-weight:700;font-size:30px;line-height:1;letter-spacing:.5px}
+  .logo .n{color:var(--blue)} .logo .e{color:var(--gold)} .logo .x{color:var(--teal)}
+  .logo .u{color:var(--gold)} .logo .s{color:var(--pink)}
+  .logo small{display:block;font-family:'Nunito';font-weight:700;font-size:11px;
+    letter-spacing:.22em;color:var(--blue);text-transform:lowercase;margin-top:2px}
+  .daypill{font-family:'Fredoka';font-weight:600;background:var(--lav);color:#2a1a55;
+    padding:8px 16px;border-radius:999px;font-size:14px}
+  .langsw{display:inline-flex;gap:4px;background:#eef0fb;border:1px solid var(--line);
+    border-radius:999px;padding:3px}
+  .lang{border:none;background:transparent;cursor:pointer;font-family:'Fredoka';font-weight:600;
+    font-size:13px;color:var(--muted);padding:5px 12px;border-radius:999px}
+  .lang.on{background:var(--blue);color:#fff}
+  .lang:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  .htitle{text-align:right}
+  .htitle .t{font-family:'Fredoka';font-weight:600;font-size:18px;color:var(--ink)}
+  .htitle .s{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.04em}
+
+  .hero{
+    background:linear-gradient(135deg,var(--teal),#2390ad 60%,var(--blue));
+    color:#fff;border-radius:var(--radius);padding:26px;margin-bottom:18px;
+    box-shadow:var(--shadow);position:relative;overflow:hidden;
+  }
+  .hero:before{content:"🌺";position:absolute;right:18px;bottom:-14px;font-size:120px;opacity:.16}
+  .hero h1{margin:0 0 8px;font-size:clamp(26px,4vw,40px);font-weight:700}
+  .hero p{margin:0;max-width:640px;font-size:16px;opacity:.95}
+  .hero .kicker{font-family:'Fredoka';font-weight:600;letter-spacing:.18em;
+    text-transform:uppercase;font-size:12px;color:var(--gold);margin-bottom:6px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+  .tile{
+    text-align:left;cursor:pointer;border:none;background:var(--card);
+    border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);
+    border:1px solid var(--line);transition:transform .15s ease, box-shadow .15s ease;
+    display:flex;flex-direction:column;gap:8px;font-family:inherit;color:var(--ink);
+  }
+  .tile:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(31,42,140,.16)}
+  .tile:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+  .tile .ic{font-size:34px}
+  .tile h3{margin:0;font-size:21px;font-weight:600}
+  .tile p{margin:0;color:var(--muted);font-size:14px;font-weight:600}
+  .tile .go{margin-top:6px;font-family:'Fredoka';font-weight:600;font-size:14px;color:var(--blue)}
+  .tile.c1{border-top:5px solid var(--gold)}
+  .tile.c2{border-top:5px solid var(--teal)}
+  .tile.c3{border-top:5px solid var(--pink)}
+  .tile.c4{border-top:5px solid var(--lav)}
+  .tile.c5{border-top:5px solid var(--blue)}
+
+  .screen{display:none;animation:fade .25s ease}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .bar{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+  .back{font-family:'Fredoka';font-weight:600;cursor:pointer;border:1px solid var(--line);
+    background:var(--card);color:var(--blue);border-radius:999px;padding:9px 16px;font-size:14px}
+  .back:hover{background:#eef0fb}
+  .screen h2{font-size:clamp(22px,3.4vw,30px);margin:0;font-weight:600}
+
+  .howto{
+    background:var(--card);border:1px solid var(--line);border-left:5px solid var(--teal);
+    border-radius:16px;padding:14px 18px;margin-bottom:18px;box-shadow:var(--shadow);
+  }
+  .howto b{font-family:'Fredoka';font-weight:600;color:var(--teal)}
+  .howto p{margin:6px 0 0;color:var(--muted);font-weight:600}
+
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .chip{cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);
+    border-radius:999px;padding:8px 15px;font-weight:700;font-size:14px;font-family:inherit;transition:.15s}
+  .chip:hover{border-color:var(--lav)}
+  .chip.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+  .spk{cursor:pointer;border:none;background:var(--teal);color:#fff;width:42px;height:42px;
+    border-radius:50%;font-size:18px;display:inline-flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 12px rgba(27,164,176,.4);transition:.15s}
+  .spk:hover{transform:scale(1.08)}
+  .spk:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+  .fc{perspective:1200px;height:218px}
+  .fc-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+  .fc.flip .fc-inner{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;
+    padding:16px;display:flex;flex-direction:column;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .fc-front{background:var(--card)}
+  .fc-front .lvl{font-size:12px;font-weight:800;color:var(--gold)}
+  .fc-front .cat{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--lav)}
+  .fc-front .word{font-family:'Fredoka';font-weight:600;font-size:25px;margin-top:auto;color:var(--blue)}
+  .fc-front .hint{font-size:12px;color:var(--muted);font-weight:700}
+  .fc-front .row{display:flex;justify-content:space-between;align-items:center}
+  .fc-back{background:linear-gradient(135deg,#fff,#eef6f7);transform:rotateY(180deg);overflow:auto}
+  .fc-back .def{font-weight:700;font-size:15px}
+  .fc-back .ex{font-style:italic;color:var(--blue);font-size:14px;margin-top:6px;font-weight:600}
+  .fc-back .tg{margin-top:auto;display:flex;flex-direction:column;gap:1px}
+  .fc-back .ro{font-weight:800;color:var(--teal);font-size:14px}
+  .fc-back .ro b,.fc-back .ru b{font-size:9px;opacity:.6;margin-right:3px;letter-spacing:.05em;vertical-align:1px}
+  .fc-back .ru{font-weight:800;color:var(--pink);font-size:14px}
+  .empty{color:var(--muted);font-weight:700;padding:30px;text-align:center}
+
+  .qcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;box-shadow:var(--shadow);max-width:640px;margin:0 auto}
+  .score{display:flex;gap:18px;justify-content:center;margin-bottom:14px;flex-wrap:wrap}
+  .score .b{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:8px 18px;font-weight:800;box-shadow:var(--shadow)}
+  .score .b span{color:var(--blue);font-family:'Fredoka'}
+  .qhead{display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:6px}
+  .qprompt{text-align:center;font-family:'Fredoka';font-weight:500;font-size:23px;margin:6px 0 8px;min-height:34px}
+  .qsub{text-align:center;color:var(--muted);font-weight:700;margin:0 0 18px}
+  .opts{display:grid;gap:12px}
+  .opt{cursor:pointer;border:2px solid var(--line);background:#fff;color:var(--ink);
+    border-radius:14px;padding:15px 18px;font-size:17px;font-weight:700;font-family:inherit;
+    text-align:left;transition:.12s}
+  .opt:hover:not([disabled]){border-color:var(--lav);transform:translateY(-2px)}
+  .opt:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  .opt.right{border-color:var(--ok);background:#ecfdf3;color:#0a5c2c}
+  .opt.wrong{border-color:var(--no);background:#fef2f2;color:#9b1c1c}
+  .opt[disabled]{cursor:default}
+  .feedback{text-align:center;font-weight:800;margin-top:16px;min-height:24px;font-size:16px}
+  .feedback.good{color:var(--ok)} .feedback.bad{color:var(--no)}
+  .nextbtn{display:block;margin:18px auto 0;font-family:'Fredoka';font-weight:600;cursor:pointer;
+    border:none;background:var(--blue);color:#fff;border-radius:999px;padding:12px 30px;font-size:16px}
+  .nextbtn:hover{background:#2a39b8}
+  .nextbtn[disabled]{opacity:.4;cursor:default}
+
+  .ref{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+  .ref .box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+  .ref .box h4{margin:0 0 6px;font-family:'Fredoka';font-weight:600;font-size:17px}
+  .ref .box.a h4{color:var(--pink)} .ref .box.b h4{color:var(--teal)}
+  .ref .box p{margin:4px 0;font-weight:700;font-size:14px}
+  .ref .box .eg{color:var(--blue);font-style:italic}
+  .seg{display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
+
+  .plist{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .pcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;
+    box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px;border-left:5px solid var(--gold)}
+  .pcard .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .pcard .en{font-family:'Fredoka';font-weight:500;font-size:19px;color:var(--ink)}
+  .pcard .tag{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    color:#fff;background:var(--lav);padding:3px 9px;border-radius:999px;align-self:flex-start}
+  .pcard .ro{color:var(--teal);font-weight:700;font-size:14px}
+  .pcard .ro b,.pcard .ru b{font-size:9px;opacity:.6;margin-right:3px;letter-spacing:.05em;vertical-align:1px}
+  .pcard .ru{color:var(--muted);font-weight:700;font-size:14px}
+
+  .setup{max-width:520px;margin:0 auto;background:var(--card);border:1px solid var(--line);
+    border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+  .setup label{font-family:'Fredoka';font-weight:600;display:block;margin:10px 0 4px}
+  .setup input{width:100%;padding:12px 14px;border:2px solid var(--line);border-radius:12px;
+    font-size:16px;font-family:inherit;font-weight:700}
+  .setup input:focus{outline:none;border-color:var(--blue)}
+  .scoreboard{display:flex;gap:14px;justify-content:center;margin-bottom:18px;flex-wrap:wrap}
+  .team{flex:1;min-width:160px;max-width:260px;background:var(--card);border:1px solid var(--line);
+    border-radius:18px;padding:14px 18px;box-shadow:var(--shadow);text-align:center}
+  .team.t1{border-top:6px solid var(--pink)}
+  .team.t2{border-top:6px solid var(--teal)}
+  .team .nm{font-family:'Fredoka';font-weight:600;font-size:18px}
+  .team .pts{font-family:'Fredoka';font-weight:700;font-size:40px;color:var(--blue);line-height:1}
+  .turn{font-weight:800;font-size:13px;color:var(--gold);min-height:18px}
+  .board{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:560px;margin:0 auto}
+  .cell{aspect-ratio:1.4/1;border:none;border-radius:16px;cursor:pointer;font-family:'Fredoka';
+    font-weight:700;font-size:26px;color:#fff;background:linear-gradient(135deg,var(--blue),#3a48c9);
+    box-shadow:var(--shadow);transition:.15s}
+  .cell:hover:not([disabled]){transform:scale(1.05)}
+  .cell:nth-child(4n+2){background:linear-gradient(135deg,var(--teal),#28c2cf)}
+  .cell:nth-child(4n+3){background:linear-gradient(135deg,var(--pink),#ff4d82)}
+  .cell:nth-child(4n+4){background:linear-gradient(135deg,var(--lav),#9b7fe0)}
+  .cell[disabled]{opacity:.25;cursor:default;transform:none}
+  .cell:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+  .modal{position:fixed;inset:0;background:rgba(26,27,46,.6);display:none;
+    align-items:center;justify-content:center;padding:18px;z-index:50}
+  .modal.open{display:flex}
+  .mbox{background:#fff;border-radius:24px;max-width:520px;width:100%;padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+  .mbox .mp{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--lav)}
+  .mbox .mq{font-family:'Fredoka';font-weight:500;font-size:24px;margin:8px 0 18px}
+  .mbox .ma{background:#eef6f7;border-radius:14px;padding:16px;font-weight:800;font-size:18px;
+    color:var(--blue);display:none}
+  .mbox .ma .ru{display:block;color:var(--muted);font-weight:700;font-size:14px;margin-top:4px}
+  .mbtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .mbtns button{flex:1;min-width:120px;border:none;border-radius:12px;padding:13px;cursor:pointer;
+    font-family:'Fredoka';font-weight:600;font-size:15px;color:#fff}
+  .reveal{background:var(--gold);color:#3a2a00}
+  .award1{background:var(--pink)} .award2{background:var(--teal)}
+  .miss{background:#9aa0bf}
+  .winbanner{text-align:center;font-family:'Fredoka';font-weight:600;font-size:22px;
+    color:var(--blue);margin-top:18px;min-height:30px}
+
+  footer{text-align:center;color:var(--muted);font-weight:700;font-size:13px;padding:26px 0 10px}
+
+  @media (max-width:560px){
+    .ref{grid-template-columns:1fr}
+    .htitle{display:none}
+    .board{grid-template-columns:repeat(3,1fr)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .fc-inner{transition:transform .01s!important}
+  }
+</style>
+</head>
+<body>
+<div class="tape" aria-hidden="true">
+  <span>&lt;GROW&gt;</span><span>&lt;LEARN&gt;</span><span>&lt;SUCCEED&gt;</span><span>&lt;DISCOVER&gt;</span><span>&lt;DREAM&gt;</span><span>&lt;DO&gt;</span><span>&lt;EXPLORE&gt;</span><span>&lt;CREATE&gt;</span><span>&lt;INSPIRE&gt;</span><span>&lt;BELIEVE&gt;</span><span>&lt;THRIVE&gt;</span><span>&lt;INNOVATE&gt;</span>
+</div>
+
+<div class="wrap">
+  <header class="top">
+    <div style="display:flex;align-items:center;gap:16px">
+      <div class="logo"><span class="n">N</span><span class="e">e</span><span class="x">x</span><span class="u">u</span><span class="s">s</span><small>insight academy</small></div>
+      <div class="daypill">Day 9 · Island</div>
+      <div class="langsw" title="Quiz & game language (cards show both)">
+        <button class="lang on" id="langRU" onclick="setLang('ru')">RU</button>
+        <button class="lang" id="langRO" onclick="setLang('ro')">RO</button>
+      </div>
+    </div>
+    <div class="htitle">
+      <div class="t">Real English Camp</div>
+      <div class="s">Feelings · Present Continuous · Movement</div>
+    </div>
+  </header>
+
+  <!-- ============ HOME ============ -->
+  <section id="home" class="screen active">
+    <div class="hero">
+      <div class="kicker">Day 9 — Island Adventure English</div>
+      <h1>Aloha, young actors! 🌴</h1>
+      <p>Pick an activity below. Learn new words, train the Present Continuous, practise movement words, and play in teams. Tap any 🔊 button to hear the word — then say it out loud and act it out!</p>
+    </div>
+
+    <div class="grid">
+      <button class="tile c1" onclick="go('flashcards')">
+        <div class="ic">🃏</div>
+        <h3>Word Cards</h3>
+        <p>Flip cards, hear the word, learn the meaning. Choose your level.</p>
+        <div class="go">Open →</div>
+      </button>
+      <button class="tile c2" onclick="go('quiz')">
+        <div class="ic">⚡</div>
+        <h3>Quiz Challenge</h3>
+        <p>Answer questions and earn points. How many can you get right?</p>
+        <div class="go">Open →</div>
+      </button>
+      <button class="tile c3" onclick="go('grammar')">
+        <div class="ic">📐</div>
+        <h3>Grammar Lab</h3>
+        <p>Practise the Present Continuous and prepositions of movement.</p>
+        <div class="go">Open →</div>
+      </button>
+      <button class="tile c4" onclick="go('phrases')">
+        <div class="ic">💬</div>
+        <h3>Everyday Phrases</h3>
+        <p>Kind, useful sentences to learn by heart. Listen and repeat.</p>
+        <div class="go">Open →</div>
+      </button>
+      <button class="tile c5" onclick="go('team')">
+        <div class="ic">🏆</div>
+        <h3>Team Battle</h3>
+        <p>Two teams, one board. Answer questions and win points!</p>
+        <div class="go">Open →</div>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ FLASHCARDS ============ -->
+  <section id="flashcards" class="screen">
+    <div class="bar"><button class="back" onclick="go('home')">← Home</button><h2>🃏 Word Cards</h2></div>
+    <div class="howto">
+      <b>What to do</b>
+      <p>Tap a card to flip it and see the meaning. Tap the 🔊 button to hear the word out loud and copy the sound. Use the buttons below to pick a topic or a level.</p>
+    </div>
+    <div class="chips" id="catChips"></div>
+    <div class="chips" id="lvlChips"></div>
+    <div class="cards" id="cardGrid"></div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section id="quiz" class="screen">
+    <div class="bar"><button class="back" onclick="go('home')">← Home</button><h2>⚡ Quiz Challenge</h2></div>
+    <div class="howto">
+      <b>What to do</b>
+      <p>Read the question and tap the answer you think is correct. Green means right, red means try again next time. Earn one point for each correct answer and beat your best score!</p>
+    </div>
+    <div class="score">
+      <div class="b">Question <span id="qNum">1</span> / <span id="qTot">10</span></div>
+      <div class="b">Score <span id="qScore">0</span></div>
+    </div>
+    <div class="qcard">
+      <div class="qhead"><button class="spk" id="qSpk" aria-label="Hear the word" title="Listen">🔊</button></div>
+      <div class="qprompt" id="qPrompt"></div>
+      <div class="opts" id="qOpts"></div>
+      <div class="feedback" id="qFeed"></div>
+      <button class="nextbtn" id="qNext" onclick="quizNext()" disabled>Next →</button>
+    </div>
+  </section>
+
+  <!-- ============ GRAMMAR ============ -->
+  <section id="grammar" class="screen">
+    <div class="bar"><button class="back" onclick="go('home')">← Home</button><h2>📐 Grammar Lab</h2></div>
+    <div class="howto">
+      <b>What to do</b>
+      <p>Choose a topic, read the rule, then tap the correct answer. <b>Present Continuous</b> shows what is happening right now (<i>am / is / are + verb-ing</i>). <b>Prepositions of movement</b> show how someone moves from place to place.</p>
+    </div>
+    <div class="seg">
+      <button class="chip on" id="segA" onclick="grammarMode('present')">Present Continuous</button>
+      <button class="chip" id="segB" onclick="grammarMode('prep')">Prepositions of Movement</button>
+    </div>
+
+    <div class="ref" id="refPresent">
+      <div class="box a"><h4>Step 1 — choose am / is / are</h4>
+        <p>I → <b>am</b> · he / she / it → <b>is</b> · we / you / they → <b>are</b></p>
+        <p class="eg">“They are running on the sand.”</p></div>
+      <div class="box b"><h4>Step 2 — add -ing to the verb</h4>
+        <p>run → <b>running</b>, take → <b>taking</b>, swim → <b>swimming</b></p>
+        <p class="eg">“She is taking a photo right now.”</p></div>
+    </div>
+    <div class="ref" id="refPrep" style="display:none">
+      <div class="box a"><h4>In, out, through</h4>
+        <p><b>into</b> = inside · <b>out of</b> = to the outside · <b>through</b> = from one side to the other</p>
+        <p class="eg">“The cat runs into the house.”</p></div>
+      <div class="box b"><h4>Up, down, near, away</h4>
+        <p><b>over</b> = above · <b>under</b> = below · <b>towards</b> = closer · <b>away from</b> = leaving</p>
+        <p class="eg">“He jumps over the rock.”</p></div>
+    </div>
+
+    <div class="score">
+      <div class="b">Question <span id="gNum">1</span> / <span id="gTot">8</span></div>
+      <div class="b">Score <span id="gScore">0</span></div>
+    </div>
+    <div class="qcard">
+      <div class="qprompt" id="gPrompt"></div>
+      <div class="qsub" id="gSub"></div>
+      <div class="opts" id="gOpts"></div>
+      <div class="feedback" id="gFeed"></div>
+      <button class="nextbtn" id="gNext" onclick="grammarNext()" disabled>Next →</button>
+    </div>
+  </section>
+
+  <!-- ============ PHRASES ============ -->
+  <section id="phrases" class="screen">
+    <div class="bar"><button class="back" onclick="go('home')">← Home</button><h2>💬 Everyday Phrases</h2></div>
+    <div class="howto">
+      <b>What to do</b>
+      <p>These are kind, useful sentences for friends and family. Try to learn them by heart. Tap 🔊 to hear each phrase, then repeat it out loud three times. The small grey line shows the meaning.</p>
+    </div>
+    <div class="plist" id="phraseList"></div>
+  </section>
+
+  <!-- ============ TEAM GAME ============ -->
+  <section id="team" class="screen">
+    <div class="bar"><button class="back" onclick="go('home')">← Home</button><h2>🏆 Team Battle</h2></div>
+    <div class="howto">
+      <b>How to play</b>
+      <p>Divide the class into two teams. Teams take turns. On your turn, pick a tile, read the question out loud, and answer it. Tap <b>Show answer</b> to check, then give the points to the team that answered. Higher tiles are worth more. The team with the most points wins!</p>
+    </div>
+
+    <div id="teamSetup" class="setup">
+      <label for="t1n">Team 1 name</label>
+      <input id="t1n" value="The Islanders" maxlength="20">
+      <label for="t2n">Team 2 name</label>
+      <input id="t2n" value="The Aliens" maxlength="20">
+      <button class="nextbtn" onclick="startTeam()" style="margin-top:18px">Start the battle →</button>
+    </div>
+
+    <div id="teamPlay" style="display:none">
+      <div class="scoreboard">
+        <div class="team t1"><div class="nm" id="t1Name"></div><div class="pts" id="t1Pts">0</div><div class="turn" id="t1Turn">▶ Your turn</div></div>
+        <div class="team t2"><div class="nm" id="t2Name"></div><div class="pts" id="t2Pts">0</div><div class="turn" id="t2Turn"></div></div>
+      </div>
+      <div class="board" id="teamBoard"></div>
+      <div class="winbanner" id="winBanner"></div>
+      <button class="nextbtn" onclick="resetTeam()" style="margin-top:18px;background:#9aa0bf">Reset board</button>
+    </div>
+  </section>
+
+  <footer><span class="logo" style="font-size:18px"><span class="n">N</span><span class="e">e</span><span class="x">x</span><span class="u">u</span><span class="s">s</span></span> · Real English Camp · Day 9 · Island Adventure English</footer>
+</div>
+
+<div class="modal" id="teamModal">
+  <div class="mbox">
+    <div class="mp" id="mPts"></div>
+    <div class="mq" id="mQ"></div>
+    <div class="ma" id="mA"><span id="mAtext"></span><span class="ru" id="mAru"></span></div>
+    <div class="mbtns">
+      <button class="reveal" id="mReveal" onclick="revealAnswer()">Show answer</button>
+      <button class="award1" id="mA1" onclick="award(1)" style="display:none"></button>
+      <button class="award2" id="mA2" onclick="award(2)" style="display:none"></button>
+      <button class="miss" id="mMiss" onclick="award(0)" style="display:none">No points</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ================= SPEECH ================= */
+let voice=null;
+function loadVoice(){
+  const vs=window.speechSynthesis?speechSynthesis.getVoices():[];
+  voice = vs.find(v=>/en[-_](GB|US)/i.test(v.lang)) || vs.find(v=>/^en/i.test(v.lang)) || null;
+}
+if('speechSynthesis' in window){ loadVoice(); speechSynthesis.onvoiceschanged=loadVoice; }
+function speak(text){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text.replace(/—.*$/,'').trim());
+  u.lang='en-US'; u.rate=.9; u.pitch=1;
+  if(voice) u.voice=voice;
+  speechSynthesis.speak(u);
+}
+
+/* ================= NAV ================= */
+function go(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ================= DATA ================= */
+const CATS={feelings:'Feelings & Moods',animals:'Animals & Shelter',verbs:'Action Verbs',adventure:'Sea & Adventure',describe:'Describing Words',culture:'Culture & Family'};
+
+const VOCAB=[
+ {en:'excited',ru:'взволнованный, в восторге',ro:'entuziasmat, emoționat',def:'Very happy and full of energy about something.',ex:'I am excited about the trip!',cat:'feelings',lvl:1},
+ {en:'sleepy',ru:'сонный',ro:'somnoros',def:'Tired and ready to sleep.',ex:'I feel sleepy after lunch.',cat:'feelings',lvl:1},
+ {en:'bored',ru:'скучающий',ro:'plictisit',def:'Not interested, with nothing fun to do.',ex:'I am bored on rainy days.',cat:'feelings',lvl:1},
+ {en:'curious',ru:'любопытный',ro:'curios',def:'Wanting to learn or know about things.',ex:'Curious kids ask many questions.',cat:'feelings',lvl:1},
+ {en:'grumpy',ru:'ворчливый, угрюмый',ro:'morocănos',def:'In a bad mood and easily annoyed.',ex:'He is grumpy in the morning.',cat:'feelings',lvl:2},
+ {en:'lonely',ru:'одинокий',ro:'singuratic',def:'Sad because you are alone.',ex:'She felt lonely at the new school.',cat:'feelings',lvl:2},
+ {en:'peaceful',ru:'спокойный, мирный',ro:'liniștit, pașnic',def:'Calm and quiet.',ex:'The beach is peaceful in the morning.',cat:'feelings',lvl:2},
+ {en:'stubborn',ru:'упрямый',ro:'încăpățânat',def:'Not wanting to change your mind.',ex:'A stubborn child says "no" a lot.',cat:'feelings',lvl:3},
+
+ {en:'sturdy',ru:'крепкий, прочный',ro:'solid, rezistent',def:'Strong and not easy to break.',ex:'We need a sturdy box for the trip.',cat:'animals',lvl:2},
+ {en:'adoptable',ru:'тот, кого можно взять домой',ro:'care poate fi adoptat',def:'Ready to be taken home from a shelter.',ex:'All these puppies are adoptable.',cat:'animals',lvl:3},
+ {en:'instinct',ru:'инстинкт',ro:'instinct',def:'A feeling that tells animals what to do without learning.',ex:'Birds fly south by instinct.',cat:'animals',lvl:2},
+ {en:'species',ru:'вид (биологический)',ro:'specie',def:'One single type of animal or plant.',ex:'The panda is a rare species.',cat:'animals',lvl:2},
+ {en:'to blend in',ru:'сливаться, не выделяться',ro:'a se contopi, a nu ieși în evidență',def:'To look the same as everything around you.',ex:'The lizard blends in with the leaves.',cat:'animals',lvl:3},
+ {en:'shield',ru:'щит',ro:'scut',def:'A flat object that protects you.',ex:'The knight raised his shield.',cat:'animals',lvl:1},
+
+ {en:'to touch',ru:'трогать, прикасаться',ro:'a atinge',def:'To put your hand on something.',ex:'Please don\u2019t touch the wet paint.',cat:'verbs',lvl:1},
+ {en:'to yell',ru:'кричать',ro:'a striga, a țipa',def:'To shout very loudly.',ex:'Don\u2019t yell, I can hear you.',cat:'verbs',lvl:1},
+ {en:'to wreck',ru:'разрушать, крушить',ro:'a distruge, a sfărâma',def:'To break or destroy something badly.',ex:'The storm wrecked the old boat.',cat:'verbs',lvl:2},
+ {en:'to interact',ru:'взаимодействовать, общаться',ro:'a interacționa',def:'To talk and do things together.',ex:'Robots can interact with people.',cat:'verbs',lvl:3},
+ {en:'to linger',ru:'задерживаться, медлить',ro:'a zăbovi',def:'To stay somewhere a little longer.',ex:'We lingered at the park after sunset.',cat:'verbs',lvl:3},
+ {en:'to determine',ru:'определять, делать вывод',ro:'a determina, a stabili',def:'To find out or decide something.',ex:'A test can determine your level.',cat:'verbs',lvl:3},
+ {en:'to be left behind',ru:'быть оставленным',ro:'a fi lăsat în urmă',def:'To be forgotten and not taken along.',ex:'Nobody should be left behind.',cat:'verbs',lvl:2},
+
+ {en:'waves',ru:'волны',ro:'valuri',def:'Moving water that rises on the sea.',ex:'The waves are big today.',cat:'adventure',lvl:1},
+ {en:'ocean',ru:'океан',ro:'ocean',def:'A very large area of salt water.',ex:'Dolphins live in the ocean.',cat:'adventure',lvl:1},
+ {en:'roller coaster',ru:'американские горки',ro:'roller coaster, montagne russe',def:'A fast ride that goes up, down and around.',ex:'The roller coaster was so fast!',cat:'adventure',lvl:2},
+ {en:'to swirl',ru:'кружиться, водоворот',ro:'a se învârti, a face vârtejuri',def:'To move around in fast circles.',ex:'The leaves swirl in the wind.',cat:'adventure',lvl:2},
+ {en:'cascading',ru:'каскадный, спадающий вниз',ro:'în cascadă',def:'Falling down like water over rocks.',ex:'Cascading water makes a waterfall.',cat:'adventure',lvl:3},
+ {en:'willingly',ru:'охотно, по доброй воле',ro:'de bunăvoie, cu plăcere',def:'Doing something because you want to.',ex:'She willingly helped clean up.',cat:'adventure',lvl:3},
+ {en:'overdue',ru:'просроченный, запоздавший',ro:'întârziat, restant',def:'Later than it should be.',ex:'The library book is overdue.',cat:'adventure',lvl:3},
+
+ {en:'hazardous',ru:'опасный, рискованный',ro:'periculos',def:'Dangerous and able to cause harm.',ex:'Wet floors are hazardous.',cat:'describe',lvl:2},
+ {en:'bulletproof',ru:'пуленепробиваемый',ro:'antiglonț',def:'So strong that bullets cannot go through.',ex:'The car has bulletproof glass.',cat:'describe',lvl:2},
+ {en:'fireproof',ru:'огнеупорный',ro:'ignifug, rezistent la foc',def:'Able to stop fire from burning it.',ex:'The safe is fireproof.',cat:'describe',lvl:2},
+ {en:'monstrous',ru:'чудовищный, огромный',ro:'monstruos',def:'Very big or scary, like a monster.',ex:'A monstrous wave hit the rocks.',cat:'describe',lvl:3},
+
+ {en:'culture',ru:'культура',ro:'cultură',def:'The customs and ways of a group of people.',ex:'Every country has its own culture.',cat:'culture',lvl:2},
+ {en:'tradition',ru:'традиция',ro:'tradiție',def:'Something people have done for a long time.',ex:'Dancing is a family tradition.',cat:'culture',lvl:2},
+ {en:'respect',ru:'уважение',ro:'respect',def:'A polite feeling toward people and things.',ex:'We show respect to our teachers.',cat:'culture',lvl:1},
+ {en:'graceful',ru:'грациозный, изящный',ro:'grațios, elegant',def:'Moving in a smooth, beautiful way.',ex:'The dancer is very graceful.',cat:'culture',lvl:3},
+ {en:'gesture',ru:'жест',ro:'gest',def:'A movement of your hands or body to show meaning.',ex:'A wave is a friendly gesture.',cat:'culture',lvl:2},
+ {en:'family',ru:'семья',ro:'familie',def:'The people you live with and love.',ex:'Family means nobody is forgotten.',cat:'culture',lvl:1}
+];
+
+const PHRASES=[
+ {en:'How do you feel today?',ru:'Как ты себя чувствуешь сегодня?',ro:'Cum te simți astăzi?',tag:'feelings'},
+ {en:'I feel happy today.',ru:'Я чувствую себя счастливым сегодня.',ro:'Mă simt fericit astăzi.',tag:'feelings'},
+ {en:'I\u2019m a little tired.',ru:'Я немного устал(а).',ro:'Sunt puțin obosit.',tag:'feelings'},
+ {en:'Don\u2019t worry, I\u2019m here.',ru:'Не волнуйся, я рядом.',ro:'Nu-ți face griji, sunt aici.',tag:'kindness'},
+ {en:'We are a family.',ru:'Мы — семья.',ro:'Suntem o familie.',tag:'kindness'},
+ {en:'We never leave a friend behind.',ru:'Мы никогда не бросаем друга.',ro:'Nu lăsăm niciodată un prieten în urmă.',tag:'kindness'},
+ {en:'It\u2019s okay, everyone makes mistakes.',ru:'Ничего, все ошибаются.',ro:'E în regulă, toți greșim.',tag:'kindness'},
+ {en:'Can I join you?',ru:'Можно к вам присоединиться?',ro:'Pot să mă alătur vouă?',tag:'friends'},
+ {en:'Let\u2019s be friends.',ru:'Давай дружить.',ro:'Hai să fim prieteni.',tag:'friends'},
+ {en:'Thank you for helping me!',ru:'Спасибо, что помог(ла) мне!',ro:'Mulțumesc că m-ai ajutat!',tag:'friends'},
+ {en:'I\u2019m sorry, are you okay?',ru:'Извини, ты в порядке?',ro:'Îmi pare rău, ești bine?',tag:'friends'},
+ {en:'That was so much fun!',ru:'Это было так весело!',ro:'A fost foarte distractiv!',tag:'friends'}
+];
+
+/* present continuous: choose am/is/are + -ing */
+const PRESENTCONT=[
+ {sent:'I ____ a story right now.',verb:'write',a:'am writing',o:['am writing','is writing','are writing']},
+ {sent:'He ____ up the tall tree.',verb:'climb',a:'is climbing',o:['is climbing','am climbing','are climbing']},
+ {sent:'They ____ in the green bushes.',verb:'hide',a:'are hiding',o:['are hiding','is hiding','am hiding']},
+ {sent:'She ____ a photo of the beach.',verb:'take',a:'is taking',o:['is taking','are taking','am taking']},
+ {sent:'We ____ in the blue ocean.',verb:'swim',a:'are swimming',o:['are swimming','is swimming','am swimming']},
+ {sent:'The dog ____ a tropical fruit.',verb:'eat',a:'is eating',o:['is eating','are eating','am eating']},
+ {sent:'The children ____ on the sand.',verb:'run',a:'are running',o:['are running','is running','am running']},
+ {sent:'I ____ my lines for the show.',verb:'practice',a:'am practicing',o:['am practicing','is practicing','are practicing']}
+];
+
+/* prepositions of movement */
+const PREP=[
+ {sent:'The cat is running ____ the bushes.',a:'into',o:['into','out of']},
+ {sent:'She is walking ____ the ice cream shop.',a:'towards',o:['towards','away from']},
+ {sent:'The plane is flying ____ the tall mountains.',a:'over',o:['over','under']},
+ {sent:'He is surfing ____ the big waves.',a:'through',o:['through','behind']},
+ {sent:'The boy is jumping ____ the rocks.',a:'over',o:['over','into']},
+ {sent:'The girl is crawling ____ the fallen tree.',a:'under',o:['under','towards']},
+ {sent:'They are running ____ the danger.',a:'away from',o:['away from','into']},
+ {sent:'The boat is moving ____ the ocean waves.',a:'through',o:['through','over']}
+];
+
+const ARENA=[
+ {q:'Make the Present Continuous: "they / run"',a:'they are running',ru:'',ro:''},
+ {q:'What does "sturdy" mean?',a:'Strong and not easy to break',ru:'крепкий',ro:'solid'},
+ {q:'Fill in the preposition: "The cat runs ___ the box." (into / out of)',a:'into',ru:'',ro:''},
+ {q:'Make the Present Continuous: "I / write"',a:'I am writing',ru:'',ro:''},
+ {q:'What does "to yell" mean?',a:'To shout very loudly',ru:'кричать',ro:'a striga'},
+ {q:'Say a phrase to ask how someone feels.',a:'How do you feel today?',ru:'',ro:''},
+ {q:'Make the Present Continuous: "she / take a photo"',a:'she is taking a photo',ru:'',ro:''},
+ {q:'What does "instinct" mean?',a:'A feeling that tells animals what to do',ru:'инстинкт',ro:'instinct'},
+ {q:'Fill in the preposition: "He runs ___ the danger." (towards / away from)',a:'away from',ru:'',ro:''},
+ {q:'What does "respect" mean?',a:'A polite feeling toward people',ru:'уважение',ro:'respect'},
+ {q:'Make the Present Continuous: "the dog / eat"',a:'the dog is eating',ru:'',ro:''},
+ {q:'What does "willingly" mean?',a:'Doing something because you want to',ru:'охотно',ro:'de bunăvoie'},
+ {q:'Say a phrase to thank someone for helping you.',a:'Thank you for helping me!',ru:'',ro:''},
+ {q:'What does "tradition" mean?',a:'Something people do for a long time',ru:'традиция',ro:'tradiție'},
+ {q:'Fill in the preposition: "The plane flies ___ the mountains." (over / under)',a:'over',ru:'',ro:''},
+ {q:'What does "waves" mean?',a:'Moving water on the sea',ru:'волны',ro:'valuri'}
+];
+
+/* ================= HELPERS ================= */
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const stars=n=>'⭐'.repeat(n);
+
+/* ================= LANGUAGE (translation gloss) ================= */
+let lang='ru';
+function setLang(l){
+  lang=l;
+  document.getElementById('langRU').classList.toggle('on',l==='ru');
+  document.getElementById('langRO').classList.toggle('on',l==='ro');
+  if(typeof qCur!=="undefined"&&qCur)quizShow();
+}
+
+/* ================= FLASHCARDS ================= */
+let fCat='all', fLvl=0;
+function buildChips(){
+  const cc=document.getElementById('catChips');
+  cc.innerHTML='<button class="chip on" data-c="all" onclick="setCat(\'all\',this)">All topics</button>'+
+    Object.keys(CATS).map(k=>`<button class="chip" data-c="${k}" onclick="setCat('${k}',this)">${CATS[k]}</button>`).join('');
+  const lc=document.getElementById('lvlChips');
+  lc.innerHTML='<button class="chip on" data-l="0" onclick="setLvl(0,this)">All levels</button>'+
+    [1,2,3].map(l=>`<button class="chip" data-l="${l}" onclick="setLvl(${l},this)">${stars(l)} ${['','Easy','Medium','Hard'][l]}</button>`).join('');
+}
+function setCat(c,el){fCat=c;document.querySelectorAll('#catChips .chip').forEach(x=>x.classList.remove('on'));el.classList.add('on');renderCards();}
+function setLvl(l,el){fLvl=l;document.querySelectorAll('#lvlChips .chip').forEach(x=>x.classList.remove('on'));el.classList.add('on');renderCards();}
+function renderCards(){
+  const list=VOCAB.filter(v=>(fCat==='all'||v.cat===fCat)&&(fLvl===0||v.lvl===fLvl));
+  const g=document.getElementById('cardGrid');
+  if(!list.length){g.innerHTML='<div class="empty">No cards for this filter. Try another topic or level.</div>';return;}
+  g.innerHTML=list.map(v=>`
+    <div class="fc" onclick="this.classList.toggle('flip')">
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="row"><span class="cat">${CATS[v.cat].split(' ')[0]}</span><span class="lvl">${stars(v.lvl)}</span></div>
+          <div class="word">${v.en}</div>
+          <div class="row"><span class="hint">Tap to flip</span>
+            <button class="spk" aria-label="Hear ${v.en}" onclick="event.stopPropagation();speak('${v.en.replace(/'/g,"\\'")}')">🔊</button></div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="def">${v.def}</div>
+          <div class="ex">${v.ex}</div>
+          <div class="tg">
+            <div class="ro"><b>RO</b> ${v.ro}</div>
+            <div class="ru"><b>RU</b> ${v.ru}</div>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+/* ================= QUIZ ================= */
+let qPool=[],qIdx=0,qScore=0,qCur=null;
+function quizStart(){
+  qPool=shuffle(VOCAB).slice(0,10);qIdx=0;qScore=0;
+  document.getElementById('qTot').textContent=qPool.length;
+  document.getElementById('qScore').textContent=0;
+  const n=document.getElementById('qNext');n.textContent='Next →';n.onclick=quizNext;
+  quizShow();
+}
+function quizShow(){
+  qCur=qPool[qIdx];
+  document.getElementById('qNum').textContent=qIdx+1;
+  const dir=Math.random()<.5?'meaning':'word';
+  let prompt,correct,pool;
+  if(dir==='meaning'){
+    prompt='What does <b>'+qCur.en+'</b> mean?';
+    correct=qCur[lang];
+    pool=shuffle(VOCAB.filter(v=>v.en!==qCur.en)).slice(0,3).map(v=>v[lang]);
+  }else{
+    prompt='Which word means <b>“'+qCur[lang]+'”</b>?';
+    correct=qCur.en;
+    pool=shuffle(VOCAB.filter(v=>v.en!==qCur.en)).slice(0,3).map(v=>v.en);
+  }
+  document.getElementById('qPrompt').innerHTML=prompt;
+  document.getElementById('qSpk').onclick=()=>speak(qCur.en);
+  const opts=shuffle([correct,...pool]);
+  const box=document.getElementById('qOpts');box.innerHTML='';
+  document.getElementById('qFeed').textContent='';document.getElementById('qFeed').className='feedback';
+  document.getElementById('qNext').disabled=true;
+  opts.forEach(o=>{
+    const b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=()=>quizPick(b,o,correct);box.appendChild(b);
+  });
+}
+function quizPick(btn,chosen,correct){
+  document.querySelectorAll('#qOpts .opt').forEach(b=>{
+    b.disabled=true;
+    if(b.textContent===correct)b.classList.add('right');
+    else if(b===btn)b.classList.add('wrong');
+  });
+  const f=document.getElementById('qFeed');
+  if(chosen===correct){qScore++;document.getElementById('qScore').textContent=qScore;
+    f.textContent='✓ Correct! Well done.';f.className='feedback good';}
+  else{f.textContent='✗ The correct answer is: '+correct;f.className='feedback bad';}
+  speak(qCur.en);
+  document.getElementById('qNext').disabled=false;
+}
+function quizNext(){
+  qIdx++;
+  if(qIdx>=qPool.length){
+    document.getElementById('qPrompt').innerHTML='🎉 Quiz finished!';
+    document.getElementById('qOpts').innerHTML='';
+    document.getElementById('qFeed').innerHTML='You scored <b>'+qScore+' / '+qPool.length+'</b>.';
+    document.getElementById('qFeed').className='feedback good';
+    const n=document.getElementById('qNext');n.textContent='Play again ↻';n.disabled=false;n.onclick=quizStart;
+  }else quizShow();
+}
+
+/* ================= GRAMMAR ================= */
+let gType='present',gPool=[],gIdx=0,gScore=0,gCur=null;
+function grammarMode(t){
+  gType=t;
+  document.getElementById('segA').classList.toggle('on',t==='present');
+  document.getElementById('segB').classList.toggle('on',t==='prep');
+  document.getElementById('refPresent').style.display=t==='present'?'grid':'none';
+  document.getElementById('refPrep').style.display=t==='prep'?'grid':'none';
+  grammarStart();
+}
+function grammarStart(){
+  gPool=shuffle(gType==='present'?PRESENTCONT:PREP);gIdx=0;gScore=0;
+  document.getElementById('gTot').textContent=gPool.length;
+  document.getElementById('gScore').textContent=0;
+  const n=document.getElementById('gNext');n.textContent='Next →';n.onclick=grammarNext;
+  grammarShow();
+}
+function grammarShow(){
+  gCur=gPool[gIdx];
+  document.getElementById('gNum').textContent=gIdx+1;
+  let prompt,sub,opts;
+  prompt='Complete: <b>'+gCur.sent.replace('____','______')+'</b>';
+  if(gType==='present'){sub='Choose am / is / are + -ing. (verb: '+gCur.verb+')';}
+  else{sub='Which preposition shows the movement?';}
+  opts=shuffle(gCur.o);
+  document.getElementById('gPrompt').innerHTML=prompt;
+  document.getElementById('gSub').textContent=sub;
+  const box=document.getElementById('gOpts');box.innerHTML='';
+  document.getElementById('gFeed').textContent='';document.getElementById('gFeed').className='feedback';
+  document.getElementById('gNext').disabled=true;
+  opts.forEach(o=>{const b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=()=>grammarPick(b,o,gCur.a);box.appendChild(b);});
+}
+function grammarPick(btn,chosen,correct){
+  document.querySelectorAll('#gOpts .opt').forEach(b=>{b.disabled=true;
+    if(b.textContent===correct)b.classList.add('right');else if(b===btn)b.classList.add('wrong');});
+  const f=document.getElementById('gFeed');
+  const full=gCur.sent.replace('____',correct);
+  if(chosen===correct){gScore++;document.getElementById('gScore').textContent=gScore;
+    f.innerHTML='✓ Correct! '+full;f.className='feedback good';speak(full);
+  }else{f.innerHTML='✗ Correct answer: <b>'+correct+'</b>';f.className='feedback bad';}
+  document.getElementById('gNext').disabled=false;
+}
+function grammarNext(){
+  gIdx++;
+  if(gIdx>=gPool.length){
+    document.getElementById('gPrompt').innerHTML='🎉 Section finished!';
+    document.getElementById('gSub').textContent='';
+    document.getElementById('gOpts').innerHTML='';
+    document.getElementById('gFeed').innerHTML='You scored <b>'+gScore+' / '+gPool.length+'</b>.';
+    document.getElementById('gFeed').className='feedback good';
+    const n=document.getElementById('gNext');n.textContent='Try again ↻';n.disabled=false;n.onclick=grammarStart;
+  }else grammarShow();
+}
+
+/* ================= PHRASES ================= */
+function renderPhrases(){
+  const tags={feelings:'Feelings',kindness:'Kindness & family',friends:'With friends'};
+  document.getElementById('phraseList').innerHTML=PHRASES.map(p=>`
+    <div class="pcard">
+      <div class="top">
+        <div class="en">${p.en}</div>
+        <button class="spk" aria-label="Hear phrase" onclick="speak('${p.en.replace(/'/g,"\\'")}')">🔊</button>
+      </div>
+      <span class="tag">${tags[p.tag]}</span>
+      <div class="ro"><b>RO</b> ${p.ro}</div>
+      <div class="ru"><b>RU</b> ${p.ru}</div>
+    </div>`).join('');
+}
+
+/* ================= TEAM GAME ================= */
+let teams={1:{n:'',p:0},2:{n:'',p:0}},turn=1,board=[],curCell=null;
+function startTeam(){
+  teams[1]={n:document.getElementById('t1n').value||'Team 1',p:0};
+  teams[2]={n:document.getElementById('t2n').value||'Team 2',p:0};
+  document.getElementById('teamSetup').style.display='none';
+  document.getElementById('teamPlay').style.display='block';
+  document.getElementById('t1Name').textContent=teams[1].n;
+  document.getElementById('t2Name').textContent=teams[2].n;
+  buildBoard();updateTeam();
+}
+function buildBoard(){
+  const pts=[10,10,10,10,20,20,20,20,30,30,30,30,40,40,40,40];
+  const qs=shuffle(ARENA);
+  board=pts.map((p,i)=>({pts:p,q:qs[i%qs.length],done:false}));
+  turn=1;document.getElementById('winBanner').textContent='';
+  const b=document.getElementById('teamBoard');b.innerHTML='';
+  board.forEach((c,i)=>{const btn=document.createElement('button');btn.className='cell';
+    btn.textContent=c.pts;btn.onclick=()=>openCell(i,btn);b.appendChild(btn);});
+}
+function updateTeam(){
+  document.getElementById('t1Pts').textContent=teams[1].p;
+  document.getElementById('t2Pts').textContent=teams[2].p;
+  document.getElementById('t1Turn').textContent=turn===1?'▶ Your turn':'';
+  document.getElementById('t2Turn').textContent=turn===2?'▶ Your turn':'';
+}
+function openCell(i,btn){
+  if(board[i].done)return;
+  curCell={i,btn};
+  const c=board[i];
+  document.getElementById('mPts').textContent=teams[turn].n+' · '+c.pts+' points';
+  document.getElementById('mQ').textContent=c.q.q;
+  document.getElementById('mAtext').textContent=c.q.a;
+  var _tr=[];if(c.q.ro)_tr.push('RO: '+c.q.ro);if(c.q.ru)_tr.push('RU: '+c.q.ru);document.getElementById('mAru').textContent=_tr.join('   ·   ');
+  document.getElementById('mA').style.display='none';
+  document.getElementById('mReveal').style.display='block';
+  document.getElementById('mA1').style.display='none';
+  document.getElementById('mA2').style.display='none';
+  document.getElementById('mMiss').style.display='none';
+  document.getElementById('teamModal').classList.add('open');
+}
+function revealAnswer(){
+  document.getElementById('mA').style.display='block';
+  speak(board[curCell.i].q.a);
+  document.getElementById('mReveal').style.display='none';
+  const a1=document.getElementById('mA1'),a2=document.getElementById('mA2');
+  a1.textContent='+ '+teams[1].n;a2.textContent='+ '+teams[2].n;
+  a1.style.display='block';a2.style.display='block';
+  document.getElementById('mMiss').style.display='block';
+}
+function award(team){
+  const c=board[curCell.i];
+  if(team)teams[team].p+=c.pts;
+  c.done=true;curCell.btn.disabled=true;
+  document.getElementById('teamModal').classList.remove('open');
+  turn=turn===1?2:1;updateTeam();
+  if(board.every(x=>x.done))endTeam();
+}
+function endTeam(){
+  let msg;
+  if(teams[1].p>teams[2].p)msg='🏆 '+teams[1].n+' win!';
+  else if(teams[2].p>teams[1].p)msg='🏆 '+teams[2].n+' win!';
+  else msg='🤝 It\u2019s a tie! Great teamwork!';
+  document.getElementById('winBanner').textContent=msg;
+}
+function resetTeam(){
+  document.getElementById('teamPlay').style.display='none';
+  document.getElementById('teamSetup').style.display='block';
+}
+document.getElementById('teamModal').addEventListener('click',e=>{if(e.target.id==='teamModal')e.currentTarget.classList.remove('open');});
+
+/* ================= INIT ================= */
+buildChips();renderCards();quizStart();grammarMode('present');renderPhrases();
+</script>
+</body>
+</html>
